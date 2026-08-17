@@ -1,6 +1,6 @@
 # 8-ish 🎱
 
-For when the answer is... ish.
+For when the answer is...ish.
 
 ## About
 
