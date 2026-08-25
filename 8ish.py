@@ -1,16 +1,27 @@
 import random
 
-question = input("Ask 8ish something: ")
-
 answers = [
     "DO IT.",
     "NOPE.",
     "PROBABLY.",
     "NOT TODAY.",
     "EH. MAYBE.",
+    "WHY NOT?",
+    "I'D WAIT.",
+    "TOO ISH.",
+    "SEEMS FINE.",
+    "BAD IDEA.",
+    "GO ON THEN.",
     "ASK AGAIN."
 ]
 
-answer = random.choice(answers)
+while True:
+    question = input("\nAsk 8ish something (or type quit): ")
 
-print(answer)
+    if question.lower() == "quit":
+        print("...ish out.")
+        break
+
+    answer = random.choice(answers)
+    print(answer)
+    
