@@ -50,16 +50,40 @@ decision_markers = [
     "instead"
 ]
 
-# Learning note:
-# Context words can identify the topic without giving enough context for a decision.
-# Example: "Should I leave my job?" tells 8ish the topic, but not why the decision exists.
+# This list holds the conversation while 8ish is running.
+history = []
 
-# TODO: misspellings can still create false positives.
-# Example: "Shold I quit?" may treat "shold" like meaningful information.
+# Learning note:
+# Context words can identify the topic without giving enough context
+# for a decision.
+#
+# Example:
+# "Should I take the train?"
+# tells 8ish what the question is about, but not enough about the
+# situation to justify an answer.
+
+# TODO:
+# Misspellings can still create false positives.
+# Example: "Shold I take the train?" may treat "shold" like
+# meaningful information.
+
+# Learning note:
+# 8ish can now store earlier questions and answers during a session.
+# It remembers what happened, but it does not use that memory yet.
+#
+# Next problem:
+# Can new information be combined with earlier context before
+# 8ish makes another judgment?
 
 
 def get_topic_words(question):
-    words = question.lower().replace("?", "").replace(",", "").replace(".", "").split()
+    words = (
+        question.lower()
+        .replace("?", "")
+        .replace(",", "")
+        .replace(".", "")
+        .split()
+    )
 
     topic_words = []
 
@@ -71,7 +95,13 @@ def get_topic_words(question):
 
 
 def get_decision_signals(question):
-    words = question.lower().replace("?", "").replace(",", "").replace(".", "").split()
+    words = (
+        question.lower()
+        .replace("?", "")
+        .replace(",", "")
+        .replace(".", "")
+        .split()
+    )
 
     signals = []
 
@@ -98,13 +128,36 @@ def get_answer(question):
     return random.choice(answers)
 
 
+def show_history():
+    print("\n8ish remembers:")
+
+    if len(history) == 0:
+        print("Nothing yet.")
+        return
+
+    for item in history:
+        print("Question:", item["question"])
+        print("Answer:", item["answer"])
+        print()
+
+
 while True:
-    question = input("\nAsk 8ish something (or type quit): ")
+    question = input("\nAsk 8ish something (or type quit/history): ")
 
     if question.lower() == "quit":
         print("...ish out.")
         break
 
+    if question.lower() == "history":
+        show_history()
+        continue
+
     answer = get_answer(question)
+
+    history.append({
+        "question": question,
+        "answer": answer
+    })
+
     print(answer)
     
