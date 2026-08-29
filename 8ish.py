@@ -68,12 +68,15 @@ history = []
 # meaningful information.
 
 # Learning note:
-# 8ish can now store earlier questions and answers during a session.
-# It remembers what happened, but it does not use that memory yet.
+# 8ish can store earlier questions and answers during a session.
+# This version begins using that memory.
 #
-# Next problem:
-# Can new information be combined with earlier context before
-# 8ish makes another judgment?
+# If the previous answer was TOO ISH., 8ish assumes the next input
+# is additional context and combines the two.
+#
+# TODO:
+# This assumption can be wrong. The next input might actually be
+# a completely new question.
 
 
 def get_topic_words(question):
@@ -112,6 +115,19 @@ def get_decision_signals(question):
     return signals
 
 
+def build_context(question):
+    if len(history) == 0:
+        return question
+
+    last_item = history[-1]
+
+    if last_item["answer"] == "TOO ISH.":
+        combined_context = last_item["question"] + " " + question
+        return combined_context
+
+    return question
+
+
 def get_answer(question):
     topic_words = get_topic_words(question)
     decision_signals = get_decision_signals(question)
@@ -137,6 +153,7 @@ def show_history():
 
     for item in history:
         print("Question:", item["question"])
+        print("Context used:", item["context"])
         print("Answer:", item["answer"])
         print()
 
@@ -152,10 +169,16 @@ while True:
         show_history()
         continue
 
-    answer = get_answer(question)
+    context = build_context(question)
+
+    if context != question:
+        print("Using previous context:", context)
+
+    answer = get_answer(context)
 
     history.append({
         "question": question,
+        "context": context,
         "answer": answer
     })
 
