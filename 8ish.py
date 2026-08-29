@@ -16,6 +16,11 @@ answers = [
 ]
 
 def get_answer(question):
+    word_count = len(question.split())
+
+    if word_count < 4:
+        return "TOO ISH."
+
     return random.choice(answers)
 
 while True:
