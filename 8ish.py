@@ -15,6 +15,9 @@ answers = [
     "ASK AGAIN."
 ]
 
+def get_answer():
+    return random.choice(answers)
+
 while True:
     question = input("\nAsk 8ish something (or type quit): ")
 
@@ -22,6 +25,5 @@ while True:
         print("...ish out.")
         break
 
-    answer = random.choice(answers)
+    answer = get_answer()
     print(answer)
-    
