@@ -15,7 +15,7 @@ answers = [
     "ASK AGAIN."
 ]
 
-def get_answer():
+def get_answer(question):
     return random.choice(answers)
 
 while True:
@@ -25,5 +25,5 @@ while True:
         print("...ish out.")
         break
 
-    answer = get_answer()
+    answer = get_answer(question)
     print(answer)
