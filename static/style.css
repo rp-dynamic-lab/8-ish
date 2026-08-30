@@ -67,7 +67,13 @@ body {
 
     border-radius: 50%;
 
-    background: #050505;
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            #111111 0%,
+            #050505 55%,
+            #000000 100%
+        );
 
     box-shadow:
         inset 0 0 28px rgba(255, 255, 255, 0.08),
@@ -75,11 +81,15 @@ body {
 }
 
 
-/* BLUE ANSWER TRIANGLE */
+/* BLUE LIQUID ANSWER TRIANGLE */
 
 .triangle {
     width: 158px;
     height: 136px;
+
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
 
     display: flex;
     align-items: center;
@@ -87,7 +97,16 @@ body {
 
     padding: 18px 24px 34px;
 
-    background: #1267ff;
+    background:
+        linear-gradient(
+            145deg,
+            #0a4fd8 0%,
+            #1267ff 35%,
+            #2b7cff 58%,
+            #0957e8 100%
+        );
+
+    background-size: 180% 180%;
 
     clip-path: polygon(
         0 0,
@@ -96,13 +115,77 @@ body {
     );
 
     text-align: center;
+
+    animation:
+        liquid-shift 6s ease-in-out infinite,
+        triangle-drift 8s ease-in-out infinite;
+}
+
+
+/* LIQUID LIGHT / SOFT MOVEMENT */
+
+.triangle::before {
+    content: "";
+
+    position: absolute;
+    width: 210px;
+    height: 90px;
+
+    left: -25px;
+    top: -25px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255, 255, 255, 0.20) 0%,
+            rgba(255, 255, 255, 0.06) 45%,
+            rgba(255, 255, 255, 0) 70%
+        );
+
+    transform: rotate(-8deg);
+
+    animation: liquid-wave 7s ease-in-out infinite;
+
+    z-index: 0;
+}
+
+
+/* BUBBLES */
+
+.triangle::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 7px;
+
+    left: 30px;
+    top: 35px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.26);
+
+    box-shadow:
+        64px 13px 0 -1px rgba(255, 255, 255, 0.20),
+        40px 54px 0 -2px rgba(255, 255, 255, 0.17);
+
+    animation: bubbles-float 6s ease-in-out infinite;
+
+    z-index: 1;
 }
 
 
 /* WORDS INSIDE THE TRIANGLE */
 
 .triangle span {
-    max-width: 105px;
+    position: relative;
+    z-index: 2;
+
+    max-width: 92px;
 
     color: white;
 
@@ -111,11 +194,80 @@ body {
         Courier,
         monospace;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
 
-    line-height: 1.1;
+    line-height: 1.05;
     text-align: center;
+    text-transform: lowercase;
+
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+
+/* LIQUID ANIMATIONS */
+
+@keyframes liquid-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+@keyframes liquid-wave {
+    0% {
+        transform: translateX(-12px) rotate(-8deg);
+    }
+
+    50% {
+        transform: translateX(16px) rotate(4deg);
+    }
+
+    100% {
+        transform: translateX(-12px) rotate(-8deg);
+    }
+}
+
+
+@keyframes bubbles-float {
+    0% {
+        transform: translateY(8px);
+        opacity: 0.5;
+    }
+
+    50% {
+        transform: translateY(-8px);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translateY(8px);
+        opacity: 0.5;
+    }
+}
+
+
+@keyframes triangle-drift {
+    0% {
+        transform: translateY(1px) rotate(-0.3deg);
+    }
+
+    50% {
+        transform: translateY(-2px) rotate(0.4deg);
+    }
+
+    100% {
+        transform: translateY(1px) rotate(-0.3deg);
+    }
 }
 
 
@@ -204,11 +356,23 @@ button:hover {
     }
 
     .triangle span {
-        max-width: 90px;
-        font-size: 12px;
+        max-width: 80px;
+        font-size: 11px;
     }
 
     form {
         flex-direction: column;
+    }
+}
+
+
+/* RESPECT REDUCED-MOTION SETTINGS */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .triangle,
+    .triangle::before,
+    .triangle::after {
+        animation: none;
     }
 }
