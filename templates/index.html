@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>8-ish</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+    <main class="app">
+
+        <div class="orb">
+
+            <div class="window">
+
+                <div class="triangle">
+
+                    <span>
+                        {% if answer %}
+                            {{ answer }}
+                        {% else %}
+                            …ish
+                        {% endif %}
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if answer == "TOO ISH." %}
+            <p class="cue">tell me one more thing.</p>
+        {% endif %}
+
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="question"
+
+                {% if answer == "TOO ISH." %}
+                    placeholder="because..."
+                {% else %}
+                    placeholder="ask something..."
+                {% endif %}
+
+                autocomplete="off"
+                autofocus
+            >
+
+            <button type="submit">
+                {% if answer == "TOO ISH." %}
+                    add context
+                {% else %}
+                    ask
+                {% endif %}
+            </button>
+
+        </form>
+
+    </main>
+
+</body>
+
+</html>
