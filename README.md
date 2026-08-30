@@ -16,7 +16,7 @@ That felt like a useful place to start.
 
 Live prototype: https://eight-ish.onrender.com/
 
-Why build this?
+**Why build this?**
 
 I spend a lot of time thinking about what happens when context moves.
 
@@ -42,7 +42,7 @@ At what point is there enough?
 
 And eventually: how much judgment can we actually package into the space between a question and an answer?
 
-What 8-ish does now
+**What 8-ish does now**
 
 The current version is intentionally primitive.
 
@@ -61,7 +61,7 @@ For example, the system currently uses hand-built language rules to decide wheth
 
 Those failures are part of the project.
 
-Why keep the randomness?
+**Why keep the randomness?**
 
 I don't want to remove the Magic 8-Ball too quickly.
 
@@ -103,7 +103,7 @@ That is the part I want to keep pulling apart.
 
 The little blue triangle can stay the same while the judgment underneath it changes.
 
-Where it goes next
+**Where it goes next**
 
 Right now, 8-ish can preserve context without really knowing whether it has preserved the right context.
 
@@ -133,7 +133,7 @@ I don't know yet how much of that judgment can be packaged.
 
 That's the experiment.
 
-Why this repo looks the way it does
+**Why this repo looks the way it does**
 
 This is also an apprenticeship project.
 
@@ -157,7 +157,7 @@ I don't want the trail to look as though I already knew the finished architectur
 
 I want it to show what I noticed, what broke, and what the next version made possible.
 
-Next experiment
+**Next experiment**
 
 The next useful step is not adding a pile of smarter rules by myself.
 
@@ -180,7 +180,7 @@ session_returned
 
 Then I can use actual interaction to decide what deserves to change next instead of making the system more complicated because I can.
 
-Current stack
+**Current stack**
 Python
 Flask
 Jinja
@@ -191,7 +191,7 @@ Git / GitHub
 
 The interface is based on the answer side of a Magic 8-Ball: a black orb, recessed window, and a liquid blue triangle carrying a very small answer.
 
-Run it locally
+**Run it locally**
 
 Clone the repo and install the dependencies:
 
@@ -209,7 +209,7 @@ For a production-style local run:
 
 gunicorn app:app
 
-Status
+**Status**
 
 Very much …ish.
 
