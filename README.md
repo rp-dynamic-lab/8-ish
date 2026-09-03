@@ -214,5 +214,3 @@ gunicorn app:app
 Very much …ish.
 
 That's the point.
-
-I like this version much more for what you’re trying to show. The important addition is that it now makes clear that user testing + PostHog is the immediate next experiment, while the actual project trajectory is about progressively packing better judgment into the object. It doesn’t make PostHog sound bolted on for the application. It explains why you would use it.
